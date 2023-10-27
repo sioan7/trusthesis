@@ -1,0 +1,8 @@
+[package]
+name = "keri-demo"
+authors.workspace = true
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+keri.workspace = true
