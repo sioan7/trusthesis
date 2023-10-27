@@ -4,10 +4,10 @@ use cesrox::primitives::codes::basic::Basic;
 use cesrox::primitives::codes::self_signing::SelfSigning;
 use cesrox::ParsedData;
 use ed25519_dalek::SigningKey;
-use tracing::info;
+use log::{info, trace};
 
 fn main() {
-    let _guard = util::log::set_up_logging("cesr.log");
+    let _guard = util::log::set_up_logging("log/cesr.log").unwrap();
 
     let mut csprng = rand::rngs::OsRng;
     let signing_key: SigningKey = SigningKey::generate(&mut csprng);
@@ -25,7 +25,6 @@ fn main() {
         String::from_utf8_lossy(&signing_key.verifying_key().to_bytes())
     );
     let signature = (SelfSigning::Ed25519Sha512, ed_signature.to_bytes().to_vec());
-    info!("{}", String::from_utf8_lossy(&ed_signature.to_bytes()));
 
     let attachment = Group::NontransReceiptCouples(vec![(public_key.clone(), signature.clone())]);
     let data = ParsedData {

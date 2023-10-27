@@ -1,15 +1,9 @@
 [workspace]
-members = [
-    "packages/*",
-    "cesr",
-    "keri-demo",
-]
+members = ["packages/*", "cesr", "keri-demo"]
 resolver = "2"
 
 [workspace.package]
-authors = [
-    "Stănilă Ioan <ioanstanilais@gmail.com>",
-]
+authors = ["Stănilă Ioan <ioanstanilais@gmail.com>"]
 edition = "2021"
 version = "0.1.0"
 
@@ -20,7 +14,6 @@ anyhow = "1.0.75"
 cesrox = "0.1.4"
 ed25519-dalek = { version = "2.0.0", features = ["digest", "rand_core"] }
 keri = "0.8.2"
+log = "0.4.20"
+log4rs = { version = "1.2.0", features = ["console_appender", "file_appender"] }
 rand = "0.8.5"
-tracing = "0.1.37"
-tracing-appender = "0.2.2"
-tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }

@@ -11,5 +11,5 @@ util = { path = "../packages/util" }
 
 cesrox.workspace = true
 ed25519-dalek.workspace = true
+log.workspace = true
 rand.workspace = true
-tracing.workspace = true
