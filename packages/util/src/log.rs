@@ -9,15 +9,13 @@ pub fn set_up_logging(file_path: &str) -> Result<log4rs::Handle, SetLoggerError>
     let stderr = ConsoleAppender::builder()
         .target(Target::Stderr)
         // Pattern: https://docs.rs/log4rs/*/log4rs/encode/pattern/index.html
-        .encoder(Box::new(PatternEncoder::new(
-            "{h({d(%Y-%m-%d %H:%M:%S)(utc)} - {l}: {m}{n}}",
-        )))
+        .encoder(Box::new(PatternEncoder::new("{d} {h({l})} {t} - {m}{n}")))
         .build();
 
     let logfile = FileAppender::builder()
         // Pattern: https://docs.rs/log4rs/*/log4rs/encode/pattern/index.html
         .encoder(Box::new(PatternEncoder::new(
-            "{d(%Y-%m-%d %H:%M:%S)(utc)} - {h({l})}: {m}{n}",
+            "{h({d(%Y-%m-%d %H:%M:%S)(utc)}) - {l}: {m}{n}}",
         )))
         .build(file_path)
         .unwrap();
