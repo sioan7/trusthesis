@@ -13,3 +13,6 @@ cesrox.workspace = true
 ed25519-dalek.workspace = true
 log.workspace = true
 rand.workspace = true
+tokio = { version = "1.33.0", features = ["full"] }
+# tokio.workspace = true
+

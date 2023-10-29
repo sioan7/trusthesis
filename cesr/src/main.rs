@@ -4,9 +4,10 @@ use cesrox::primitives::codes::basic::Basic;
 use cesrox::primitives::codes::self_signing::SelfSigning;
 use cesrox::ParsedData;
 use ed25519_dalek::SigningKey;
-use log::{info, trace};
+use log::info;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let _guard = util::log::set_up_logging("log/cesr.log").unwrap();
 
     let mut csprng = rand::rngs::OsRng;
@@ -33,6 +34,14 @@ fn main() {
     };
     let cesr_stream = data.to_cesr().unwrap();
     info!("{}", String::from_utf8_lossy(&cesr_stream));
+
+    tokio::select! {
+        _ = tokio::time::sleep(std::time::Duration::from_millis(3000)) => {
+            info!("someting");
+            println!("something");
+        }
+    }
+
     // assert_eq!(&cesr_stream, br#"{"name":"John","surname":"Doe"}-CABBNdamAGCsQq31Uv-08lkBzoO4XLz2qYjJa8CGmj3B1Ea0BDkGKpYn5i5fhRrE57RGGonHMlwmfZBmsIAex6rPXuZqScZY3NPdyP60fDHmGjLy7kQj04vZsFBAyid1XOJxBgG"#);
     //
     // let (_rest, parsed_data) = parse(&cesr_stream).unwrap();
