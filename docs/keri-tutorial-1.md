@@ -16,7 +16,9 @@ docker run --rm -it gleif/keri /bin/bash
 
 ```bash
 mkdir -p /keri/heartnet/keri/cf
-mkdir /keri/{allie,brett}
+mkdir /keri/allie
+mkdir /keri/brett
+
 export KERI_CONFIG_DIR=/keri/heartnet
 
 echo '{"dt": "2022-01-20T12:57:59.823350+00:00","iurls": ["http://127.0.0.1:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller","http://127.0.0.1:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller","http://127.0.0.1:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller"]}' \
@@ -33,9 +35,10 @@ echo '{"transferable": true,"wits": ["BM35JN8XeJSEfpxopjn5jr7tAHCE5749f0OobhMLCo
 ```
 
 ### Start witness network
+In another terminal (use tmux) start the Keri demo.
 
 ```bash
-kli witness demo &
+kli witness demo
 ```
 
 ### Initialize keystores

@@ -17,16 +17,13 @@ async fn main() {
     let message = br#"{"name":"John","surname":"Doe"}"#;
     let ed_signature: Signature = signing_key.sign(message);
 
+    info!("{:?}", signing_key.verifying_key());
+
     let public_key = (
         Basic::Ed25519Nontrans,
         signing_key.verifying_key().to_bytes().to_vec(),
     );
-    info!(
-        "{}",
-        String::from_utf8_lossy(&signing_key.verifying_key().to_bytes())
-    );
     let signature = (SelfSigning::Ed25519Sha512, ed_signature.to_bytes().to_vec());
-
     let attachment = Group::NontransReceiptCouples(vec![(public_key.clone(), signature.clone())]);
     let data = ParsedData {
         payload: Payload::JSON(message.to_vec()),
@@ -34,13 +31,6 @@ async fn main() {
     };
     let cesr_stream = data.to_cesr().unwrap();
     info!("{}", String::from_utf8_lossy(&cesr_stream));
-
-    tokio::select! {
-        _ = tokio::time::sleep(std::time::Duration::from_millis(3000)) => {
-            info!("someting");
-            println!("something");
-        }
-    }
 
     // assert_eq!(&cesr_stream, br#"{"name":"John","surname":"Doe"}-CABBNdamAGCsQq31Uv-08lkBzoO4XLz2qYjJa8CGmj3B1Ea0BDkGKpYn5i5fhRrE57RGGonHMlwmfZBmsIAex6rPXuZqScZY3NPdyP60fDHmGjLy7kQj04vZsFBAyid1XOJxBgG"#);
     //
